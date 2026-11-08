@@ -53,7 +53,7 @@ dependencies {
     // Libs
     implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
 
-    implementation("de.themoep:minedown-adventure:1.7.5")
+    implementation("de.themoep:minedown-adventure:1.7.6-SNAPSHOT")
 
     compileOnly("net.luckperms:api:5.5")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
