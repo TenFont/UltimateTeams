@@ -22,6 +22,7 @@ repositories {
     maven("https://repo.aikar.co/content/groups/aikar/")
     maven ("https://repo.tcoded.com/releases")
     maven ("https://repo.minebench.de/")
+    maven("https://repo.artillex-studios.com/releases/")
 }
 
 dependencies {
@@ -57,6 +58,8 @@ dependencies {
 
     compileOnly("net.luckperms:api:5.5")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
+
+    compileOnly("com.artillexstudios:AxBoostersAPI:9")
 
     // Database
     compileOnly("org.xerial:sqlite-jdbc:3.51.0.0")

@@ -13,6 +13,7 @@ softdepend:
   - 'floodgate'
   - 'HuskHomes'
   - 'Vault'
+  - 'AxBoosters'
 libraries:
   - 'com.mysql:mysql-connector-j:9.2.0'
   - 'org.mariadb.jdbc:mariadb-java-client:3.4.1'
