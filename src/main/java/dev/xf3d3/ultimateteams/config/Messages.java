@@ -102,6 +102,20 @@ public class Messages {
             private String incorrectUsage = "[Unrecognised argument please use](dark_aqua) [/team transfer <player-name>](gold)[.](dark_aqua)";
         }
 
+        @Comment("Team Upgrade Messages")
+        private UpgradeSettings upgrade = new UpgradeSettings();
+
+        @Getter
+        @Configuration
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        public static class UpgradeSettings {
+            private String incorrectUsage = "[Unrecognised argument please use](dark_aqua) [/team upgrade %UPGRADES%](gold)[.](dark_aqua)";
+            private String unknownUpgrade = "[The upgrade](dark_aqua) [%UPGRADE%](gold) [doesn't exist, available upgrades:](dark_aqua) [%UPGRADES%](gold)[.](dark_aqua)";
+            private String maxLevelReached = "[Your team has already reached the last level of the](dark_aqua) [%UPGRADE%](gold) [upgrade!](dark_aqua)";
+            private String notEnoughFunds = "[You don't have enough money to buy this upgrade, it costs](dark_aqua) [%COST% %CURRENCY%](gold)[!](dark_aqua)";
+            private String broadcast = "[%PLAYER%](gold) [has upgraded](dark_aqua) [%UPGRADE%](gold) [to level](dark_aqua) [%LEVEL%](green) [for](dark_aqua) [%COST% %CURRENCY%](gold)[!](dark_aqua)";
+        }
+
         @Comment("Team Invite Messages")
         private InviteSettings invite = new InviteSettings();
 

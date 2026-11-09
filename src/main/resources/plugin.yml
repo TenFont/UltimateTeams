@@ -68,6 +68,7 @@ permissions:
       ultimateteams.team.fee.disable: true
       ultimateteams.team.motd.set: true
       ultimateteams.team.motd.disable: true
+      ultimateteams.team.upgrade: true
 
   ultimateteams.defaultsop:
     default: op

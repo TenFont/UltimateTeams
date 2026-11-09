@@ -414,6 +414,15 @@ public class TeamCommand extends BaseCommand {
         plugin.getTeamEnderChestSubCommand().openEnderChest(sender, chestNumber);
     }
 
+    // TEAM UPGRADES
+    @Subcommand("upgrade")
+    @CommandCompletion("@upgrades @nothing")
+    @Syntax("<upgrade>")
+    @CommandPermission("ultimateteams.team.upgrade")
+    public void onTeamUpgradeCommand(@NotNull CommandSender sender, @Optional String name) {
+        new TeamUpgradeSubCommand(plugin).teamUpgradeSubCommand(sender, name);
+    }
+
     // TEAM BANK
     @Subcommand("deposit")
     @CommandCompletion("1000|10000")

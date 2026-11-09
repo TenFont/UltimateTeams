@@ -3,6 +3,8 @@ package dev.xf3d3.ultimateteams.models;
 import com.google.common.collect.Maps;
 import com.google.gson.annotations.Expose;
 import dev.xf3d3.ultimateteams.UltimateTeams;
+import dev.xf3d3.ultimateteams.config.Upgrades;
+import dev.xf3d3.ultimateteams.config.Upgrades.UpgradeId;
 import lombok.*;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -90,10 +92,11 @@ public class Team {
     @Builder.Default
     private Map<Integer, TeamEnderChest> enderChests = Maps.newConcurrentMap();
 
-    // 0 means "use the default max team size from the config"
     @Expose
-    @Setter
-    private int maxSlots;
+    @Getter
+    @Builder.Default
+    // map of UpgradeId key->Level reached
+    private Map<String, Integer> upgrades = Maps.newConcurrentMap();
 
     @NotNull
     @ApiStatus.Internal
@@ -138,7 +141,18 @@ public class Team {
     }
 
     public int getMaxSlots(@NotNull UltimateTeams plugin) {
-        return maxSlots > 0 ? maxSlots : plugin.getSettings().getTeam().getSize().getDefaultMaxTeamSize();
+        return plugin.getUpgrades().getSlots()
+                .effectiveLevel(getUpgradeLevel(new UpgradeId.Slots()))
+                .map(Upgrades.SlotsLevel::getSlots)
+                .orElse(plugin.getSettings().getTeam().getSize().getDefaultMaxTeamSize());
+    }
+
+    public int getUpgradeLevel(@NotNull UpgradeId id) {
+        return upgrades.getOrDefault(id.key(), 0);
+    }
+
+    public void setUpgradeLevel(@NotNull UpgradeId id, int level) {
+        upgrades.put(id.key(), level);
     }
 
     public Optional<TeamWarp> getTeamWarp(@NotNull String name) {
@@ -277,7 +291,8 @@ public class Team {
         FEE,
         WITHDRAW,
         DEPOSIT,
-        MOTD;
+        MOTD,
+        UPGRADE;
 
         /**
          * Parse a {@link Permission} from a string name

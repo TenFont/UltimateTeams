@@ -19,6 +19,7 @@ import dev.xf3d3.ultimateteams.commands.subCommands.members.TeamInvites;
 import dev.xf3d3.ultimateteams.config.Messages;
 import dev.xf3d3.ultimateteams.config.Settings;
 import dev.xf3d3.ultimateteams.config.TeamsGui;
+import dev.xf3d3.ultimateteams.config.Upgrades;
 import dev.xf3d3.ultimateteams.database.*;
 import dev.xf3d3.ultimateteams.hooks.*;
 import dev.xf3d3.ultimateteams.listeners.*;
@@ -79,6 +80,7 @@ public final class UltimateTeams extends JavaPlugin implements TaskRunner, GsonU
     @Getter @Setter private Settings settings;
     @Getter @Setter private TeamsGui teamsGui;
     @Getter @Setter private Messages  messages;
+    @Getter @Setter private Upgrades upgrades;
 
     @Getter private HuskHomesHook huskHomesHook;
     @Getter private Utils utils;
@@ -236,6 +238,7 @@ public final class UltimateTeams extends JavaPlugin implements TaskRunner, GsonU
         );
         this.manager.getCommandCompletions().registerAsyncCompletion("permissions", c -> Arrays.stream(Team.Permission.values()).map(String::valueOf).collect(Collectors.toSet())
         );
+        this.manager.getCommandCompletions().registerAsyncCompletion("upgrades", c -> getUpgrades().names());
 
         // Update banned tags list
         TeamCommand.updateBannedTagsList();
@@ -370,6 +373,13 @@ public final class UltimateTeams extends JavaPlugin implements TaskRunner, GsonU
                 getDataFolder().toPath().resolve("messages.yml"),
                 Messages.class,
                 YAML_CONFIGURATION_PROPERTIES.header(Messages.MESSAGES_HEADER).build()
+        ));
+
+        // Load upgrades
+        setUpgrades(YamlConfigurations.update(
+                getDataFolder().toPath().resolve("upgrades.yml"),
+                Upgrades.class,
+                YAML_CONFIGURATION_PROPERTIES.header(Upgrades.UPGRADES_HEADER).build()
         ));
     }
 
