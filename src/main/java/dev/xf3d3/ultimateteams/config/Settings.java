@@ -230,12 +230,6 @@ public class Settings {
         public static class SizeSettings {
             @Comment("Set the default maximum amount of members that can join a players' team. [Default value: 8]")
             private int defaultMaxTeamSize = 8;
-
-            @Comment({
-                    "If true, the default members limit will be stacked with permission limit.",
-                    "If a player has ultimateteams.max_members.2 and the default limit is 8, he will be able to have 10 members. otherwise only 2."
-            })
-            private boolean stackMembers = false;
         }
 
         private HomeSettings home = new HomeSettings();

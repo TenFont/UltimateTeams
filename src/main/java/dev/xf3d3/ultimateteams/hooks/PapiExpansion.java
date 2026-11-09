@@ -226,19 +226,8 @@ public class PapiExpansion extends PlaceholderExpansion {
                 return String.valueOf(optionalTeam.isPresent());
 
             case "team_max_members":
-                return Optional.ofNullable(plugin.getUsersStorageUtil().getUsermap().get(player.getUniqueId()))
-                        .flatMap(teamPlayer ->
-                                Optional.ofNullable(Bukkit.getPlayer(player.getUniqueId()))
-                                        .map(onlinePlayer ->
-                                                teamPlayer.getMaxMembers(
-                                                        onlinePlayer,
-                                                        plugin.getSettings().getTeam().getSize().getDefaultMaxTeamSize(),
-                                                        plugin.getSettings().getTeam().getSize().isStackMembers()
-                                                )
-                                        )
-
-                        )
-                        .map(String::valueOf)
+                return optionalTeam
+                        .map(team -> String.valueOf(team.getMaxSlots(plugin)))
                         .orElse(null);
 
             case "team_kills_total":

@@ -116,7 +116,8 @@ public class Messages {
             private String cantJoinFeeWillExceedLimit = "[You can't accept the invite as the join fee will exceed the team bank limit (](dark_aqua)[%CURRENCY%%LIMIT%](gold)[)!](dark_aqua)";
             private String inviteeNotFound = "[Player](dark_aqua) [%INVITED%](gold) [was not found, make sure they are online!](dark_aqua)";
             private String invitedAlreadyInTeam = "[Player](dark_aqua) [%INVITED%](gold) [is already in a team!](dark_aqua)";
-            private String maxSizeReached = "[You have reached the team members size limit](dark_aqua) [%LIMIT%](green)[!](dark_aqua)";
+            private String maxSizeReachedInviter = "[You have reached the team members size limit](dark_aqua) [%LIMIT%](green)[!](dark_aqua)";
+            private String maxSizeReachedInvitee = "[You can't accept the invite as](dark_aqua) [%TEAM%](gold) [has reached its members size limit](dark_aqua) [%LIMIT%](green)[!](dark_aqua)";
             private String successful = "[You have invited](dark_aqua) [%INVITED%](gold) [to your team!](dark_aqua)";
             private String failed = "[Failed to send invite to](dark_aqua) [%INVITED%](gold)[, this player might already have an invitation!](dark_aqua)";
             private String invitePending = "[You have been invited to a team by](dark_aqua) [%TEAMOWNER%](gold) [- use /team invite accept](dark_aqua)";

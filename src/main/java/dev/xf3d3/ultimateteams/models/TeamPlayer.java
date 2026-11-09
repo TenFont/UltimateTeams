@@ -43,18 +43,4 @@ public class TeamPlayer {
         }
     }
 
-    public final int getMaxMembers(final Player player, final int defaultMaxMembers, final boolean stackMembers) {
-        final List<Integer> membersPerm = plugin.getUtils().getNumberPermission(player, "ultimateteams.max_members.");
-
-        if (membersPerm.isEmpty()) {
-            return defaultMaxMembers;
-
-        } else if (stackMembers) {
-            return defaultMaxMembers + membersPerm.stream().reduce(0, Integer::sum);
-
-        } else {
-            return membersPerm.getFirst();
-        }
-    }
-
 }

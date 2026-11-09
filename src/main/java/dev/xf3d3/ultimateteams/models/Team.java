@@ -90,6 +90,11 @@ public class Team {
     @Builder.Default
     private Map<Integer, TeamEnderChest> enderChests = Maps.newConcurrentMap();
 
+    // 0 means "use the default max team size from the config"
+    @Expose
+    @Setter
+    private int maxSlots;
+
     @NotNull
     @ApiStatus.Internal
     public static Team create(@NotNull String name, @NotNull Player owner, @NotNull Boolean friendlyFire, @NotNull Integer rows) {
@@ -130,6 +135,10 @@ public class Team {
             final Player player = Bukkit.getPlayer(uuid);
             if (player != null) player.sendMessage(component);
         });
+    }
+
+    public int getMaxSlots(@NotNull UltimateTeams plugin) {
+        return maxSlots > 0 ? maxSlots : plugin.getSettings().getTeam().getSize().getDefaultMaxTeamSize();
     }
 
     public Optional<TeamWarp> getTeamWarp(@NotNull String name) {
