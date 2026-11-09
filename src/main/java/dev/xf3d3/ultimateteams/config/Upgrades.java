@@ -37,16 +37,16 @@ public class Upgrades {
 
     @Comment({
             "Booster upgrade paths, one per AxBoosters booster type.",
-            "Each level sets the multiplier every team member gets for that booster type.",
+            "Each level sets the percent every team member gets for that booster type.",
             "Example:",
             "  money:",
             "    levels:",
             "      1:",
             "        cost: 2000.0",
-            "        multiplier: 1.5",
+            "        percent: 1.5",
             "      2:",
             "        cost: 5000.0",
-            "        multiplier: 2.0",
+            "        percent: 2.0",
     })
     private Map<String, BoosterUpgrade> boosters = new LinkedHashMap<>();
 
@@ -177,7 +177,7 @@ public class Upgrades {
     @Configuration
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class BoosterUpgrade implements UpgradePath<BoosterLevel> {
-        @Comment("Level number -> cost (taken from the balance of the player buying it) and the booster multiplier at that level")
+        @Comment("Level number -> cost (taken from the balance of the player buying it) and the booster percent at that level")
         private Map<Integer, BoosterLevel> levels = new TreeMap<>();
     }
 
@@ -189,7 +189,7 @@ public class Upgrades {
         @Comment("How much this level costs (taken from the balance of the player buying it)")
         private double cost = 0;
 
-        @Comment("The booster multiplier every team member gets at this level")
-        private double multiplier = 1;
+        @Comment("The booster percent every team member gets at this level")
+        private double percent = 1;
     }
 }
