@@ -43,10 +43,10 @@ public class Upgrades {
             "    levels:",
             "      1:",
             "        cost: 2000.0",
-            "        percent: 1.5",
+            "        percent: 50.0",
             "      2:",
             "        cost: 5000.0",
-            "        percent: 2.0",
+            "        percent: 100.0",
     })
     private Map<String, BoosterUpgrade> boosters = new LinkedHashMap<>();
 
@@ -190,6 +190,6 @@ public class Upgrades {
         private double cost = 0;
 
         @Comment("The booster percent every team member gets at this level")
-        private double percent = 1;
+        private double percent = 0;
     }
 }
