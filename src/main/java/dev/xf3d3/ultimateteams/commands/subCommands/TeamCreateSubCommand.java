@@ -92,7 +92,7 @@ public class TeamCreateSubCommand {
             return;
         }
 
-        if (plugin.getEconomyHook() != null && !plugin.getEconomyHook().takeMoney(player, plugin.getSettings().getEconomy().getTeamCreate().getCost())) {
+        if (plugin.getEconomyHook() != null && plugin.getSettings().getEconomy().getTeamCreate().isEnabled() && !plugin.getEconomyHook().takeMoney(player, plugin.getSettings().getEconomy().getTeamCreate().getCost())) {
             player.sendMessage(MineDown.parse(plugin.getMessages().getEconomy().getNotEnoughMoney().replace("%MONEY%", String.valueOf(plugin.getSettings().getEconomy().getTeamCreate().getCost()))));
             return;
         }
