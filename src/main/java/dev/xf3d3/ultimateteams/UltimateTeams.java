@@ -192,6 +192,11 @@ public final class UltimateTeams extends JavaPlugin implements TaskRunner, GsonU
             initialize("apollo", (plugin) -> new ApolloHook(this));
         }
 
+        // Initialize AxBoosters hook
+        if (getServer().getPluginManager().isPluginEnabled("AxBoosters")) {
+            initialize("axboosters", (plugin) -> new AxBoostersHook(this));
+        }
+
         // Register command completions
         this.manager.getCommandCompletions().registerAsyncCompletion("onlineUsers", c -> getUsersStorageUtil().getUserList().stream().map(User::getUsername).collect(Collectors.toList()));
         this.manager.getCommandCompletions().registerAsyncCompletion("teams", c -> teamsStorage.getTeamsName().stream().map(Utils::removeColors).collect(Collectors.toList()));

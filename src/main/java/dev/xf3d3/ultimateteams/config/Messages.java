@@ -626,6 +626,7 @@ public class Messages {
                 "&6UltimateTeams usage:",
                 "&3/team create <name>",
                 "&3/team disband",
+                "&3/team upgrade",
                 "&3/team invite accept/deny/send <player>",
                 "&3/team leave",
                 "&3/team kick <player>",

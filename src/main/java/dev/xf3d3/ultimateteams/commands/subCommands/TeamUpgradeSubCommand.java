@@ -2,14 +2,17 @@ package dev.xf3d3.ultimateteams.commands.subCommands;
 
 import de.themoep.minedown.adventure.MineDown;
 import dev.xf3d3.ultimateteams.UltimateTeams;
+import dev.xf3d3.ultimateteams.api.events.TeamUpgradeEvent;
 import dev.xf3d3.ultimateteams.config.Upgrades.UpgradeId;
 import dev.xf3d3.ultimateteams.config.Upgrades.UpgradePath;
 import dev.xf3d3.ultimateteams.models.Team;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class TeamUpgradeSubCommand {
@@ -81,14 +84,24 @@ public class TeamUpgradeSubCommand {
 
                     final int level = nextLevel.get().getKey();
                     final double cost = nextLevel.get().getValue().getCost();
-                    final String currencyName = cost == 1 ? plugin.getEconomyHook().getCurrencyNameSingular() : plugin.getEconomyHook().getCurrencyNamePlural();
+                    final String currencyName = Objects.requireNonNullElse(cost == 1 ? plugin.getEconomyHook().getCurrencyNameSingular() : plugin.getEconomyHook().getCurrencyNamePlural(), "");
+
+                    final Component notEnoughFunds = MineDown.parse(plugin.getMessages().getTeam().getUpgrade().getNotEnoughFunds()
+                            .replace(COST_PLACEHOLDER, String.valueOf(cost))
+                            .replace(CURRENCY_PLACEHOLDER, currencyName)
+                    );
+
+                    if (!plugin.getEconomyHook().hasMoney(player, cost)) {
+                        player.sendMessage(notEnoughFunds);
+
+                        return;
+                    }
+
+                    if (!(new TeamUpgradeEvent(player, team, id, level, cost).callEvent())) return;
 
                     // Take the cost from the player's balance
                     if (!plugin.getEconomyHook().takeMoney(player, cost)) {
-                        player.sendMessage(MineDown.parse(plugin.getMessages().getTeam().getUpgrade().getNotEnoughFunds()
-                                .replace(COST_PLACEHOLDER, String.valueOf(cost))
-                                .replace(CURRENCY_PLACEHOLDER, currencyName)
-                        ));
+                        player.sendMessage(notEnoughFunds);
 
                         return;
                     }
